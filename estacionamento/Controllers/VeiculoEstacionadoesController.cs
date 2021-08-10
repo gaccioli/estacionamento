@@ -17,48 +17,22 @@ namespace estacionamento.Controllers
         public VeiculoEstacionadoesController(ApplicationDbContext context)
         {
             _context = context;
-        }
-
-        // GET: VeiculoEstacionadoes
-        public async Task<IActionResult> Index()
+        }        
+        
+        public async Task<IActionResult> Index(string SearchString)
         {
-            
-            return View(await _context.VeiculoEstacionado.ToListAsync());
-        }
+            var placaVeiculo = from m in _context.VeiculoEstacionado
+                         select m;
 
-        // GET: VeiculoEstacionadoes/Details/5      
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
+            if (!String.IsNullOrEmpty(SearchString))
             {
-                return NotFound();
+                placaVeiculo = placaVeiculo.Where(s => s.PlacaVeiculo.Contains(SearchString));
             }
 
-            var veiculoEstacionado = await _context.VeiculoEstacionado
-                .FirstOrDefaultAsync(m => m.TicketId == id);
-            if (veiculoEstacionado == null)
-            {
-                return NotFound();
-            }
-            // Aqui faz a regra para calculo do valor e tempo total
 
-            
-
-            veiculoEstacionado.HoraSaida = DateTime.Now;
-
-            veiculoEstacionado.Duracao = veiculoEstacionado.HoraSaida.Subtract(veiculoEstacionado.HoraEntrada);
-
-            veiculoEstacionado.ValorHora = 1;
-
-            int horasCobradas = HoraAdicional(veiculoEstacionado.Duracao.Minutes);
-            
-            veiculoEstacionado.HorasCobradas = veiculoEstacionado.Duracao.Hours + horasCobradas;
-
-            veiculoEstacionado.ValorTotal = veiculoEstacionado.HorasCobradas * veiculoEstacionado.ValorHora;
-                                   
-            return View(veiculoEstacionado);
-        }
-
+            return View(await placaVeiculo.ToListAsync());
+        }       
+        
         // GET: VeiculoEstacionadoes/Create
         public IActionResult Create()
         {
@@ -98,18 +72,14 @@ namespace estacionamento.Controllers
             }
 
             var veiculoEstacionado = await _context.VeiculoEstacionado.FindAsync(id);
-
-            int horasCobradas = HoraAdicional(veiculoEstacionado.Duracao.Minutes);
-            veiculoEstacionado.HorasCobradas = veiculoEstacionado.Duracao.Hours + horasCobradas;
-            veiculoEstacionado.ValorTotal = veiculoEstacionado.HorasCobradas * veiculoEstacionado.ValorHora;
-
+                        
             if (veiculoEstacionado == null)
             {
                 return NotFound();
             }
             return View(veiculoEstacionado);
-        }
-      
+        }      
+
 
         // POST: VeiculoEstacionadoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -133,9 +103,7 @@ namespace estacionamento.Controllers
 
                     veiculoEstacionado.Duracao = veiculoEstacionado.HoraSaida.Subtract(veiculoEstacionado.HoraEntrada);
 
-                    veiculoEstacionado.ValorHora = 1;
-
-                    int horasCobradas = HoraAdicional(veiculoEstacionado.Duracao.Minutes);
+                    int horasCobradas = HoraAdicional(veiculoEstacionado.Duracao.Minutes, veiculoEstacionado.Duracao.Hours);
 
                     veiculoEstacionado.HorasCobradas = veiculoEstacionado.Duracao.Hours + horasCobradas;
 
@@ -164,60 +132,8 @@ namespace estacionamento.Controllers
             }
             
             return View(veiculoEstacionado);
-        }
-
-        // GET: VeiculoEstacionadoes/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var veiculoEstacionado = await _context.VeiculoEstacionado
-                .FirstOrDefaultAsync(m => m.TicketId == id);
-            if (veiculoEstacionado == null)
-            {
-                return NotFound();
-            }
-
-            return View(veiculoEstacionado);
-        }
-
-
-        // POST: VeiculoEstacionadoes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var veiculoEstacionado = await _context.VeiculoEstacionado.FindAsync(id);
-            _context.VeiculoEstacionado.Remove(veiculoEstacionado);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        [HttpPost, ActionName("SaidaVeiculo")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ConfirmedExit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var veiculoEstacionado = await _context.VeiculoEstacionado
-                .FirstOrDefaultAsync(m => m.TicketId == id);
-            if (veiculoEstacionado == null)
-            {
-                return NotFound();
-            }
-
-            _context.VeiculoEstacionado.Update(veiculoEstacionado);
-            await _context.SaveChangesAsync();
-
-            return RedirectToAction(nameof(Index));
-        }
-
+        }       
+        
         private bool VeiculoEstacionadoExists(int id)
         {
             return _context.VeiculoEstacionado.Any(e => e.TicketId == id);
@@ -228,15 +144,20 @@ namespace estacionamento.Controllers
             return _context.VeiculoEstacionado.Any(e => e.PlacaVeiculo == placa && e.Status == 0);
         }
 
-        private int HoraAdicional (int i)
+        private int HoraAdicional (int minutos, int horas)
         {
-            if (i >= 10)
+
+            if (horas > 0 && minutos < 10)
+            {
+                return 0;
+            }
+            else
             {
                 return 1;
             }
-            else return 0;
 
             
         }
+       
     }
 }

@@ -15,5 +15,7 @@ namespace estacionamento.Data
             Database.Migrate();
         }
         public DbSet<estacionamento.Models.SaidaVeiculoEstacionado> VeiculoEstacionado { get; set; }
+
+
     }
 }

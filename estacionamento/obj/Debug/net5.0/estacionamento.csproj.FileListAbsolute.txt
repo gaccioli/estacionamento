@@ -67,8 +67,6 @@ D:\Projetos\estacionamento\estacionamento\obj\Debug\net5.0\estacionamento.TagHel
 D:\Projetos\estacionamento\estacionamento\obj\Debug\net5.0\estacionamento.TagHelpers.output.cache
 D:\Projetos\estacionamento\estacionamento\obj\Debug\net5.0\estacionamento.RazorCoreGenerate.cache
 D:\Projetos\estacionamento\estacionamento\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
-D:\Projetos\estacionamento\estacionamento\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
-D:\Projetos\estacionamento\estacionamento\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 D:\Projetos\estacionamento\estacionamento\obj\Debug\net5.0\Razor\Views\Shared\Error.cshtml.g.cs
 D:\Projetos\estacionamento\estacionamento\obj\Debug\net5.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 D:\Projetos\estacionamento\estacionamento\obj\Debug\net5.0\Razor\Views\Shared\_LoginPartial.cshtml.g.cs
@@ -160,7 +158,5 @@ D:\Projetos\estacionamento\estacionamento\bin\Debug\net5.0\zh-Hant\Microsoft.Cod
 D:\Projetos\estacionamento\estacionamento\bin\Debug\net5.0\runtimes\win-arm\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
 D:\Projetos\estacionamento\estacionamento\bin\Debug\net5.0\runtimes\win-arm64\lib\net5.0\dotnet-aspnet-codegenerator-design.exe
 D:\Projetos\estacionamento\estacionamento\obj\Debug\net5.0\Razor\Views\VeiculoEstacionadoes\Create.cshtml.g.cs
-D:\Projetos\estacionamento\estacionamento\obj\Debug\net5.0\Razor\Views\VeiculoEstacionadoes\Delete.cshtml.g.cs
-D:\Projetos\estacionamento\estacionamento\obj\Debug\net5.0\Razor\Views\VeiculoEstacionadoes\Details.cshtml.g.cs
 D:\Projetos\estacionamento\estacionamento\obj\Debug\net5.0\Razor\Views\VeiculoEstacionadoes\Edit.cshtml.g.cs
 D:\Projetos\estacionamento\estacionamento\obj\Debug\net5.0\Razor\Views\VeiculoEstacionadoes\Index.cshtml.g.cs

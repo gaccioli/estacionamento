@@ -4,14 +4,27 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Estacionamento</h1>
 
 <p>
-    <a asp-action="Create">Marcar Endrada</a>
-    
+    <a asp-action="Create" class="btn btn-primary">Marcar Endrada</a>
+
 </p>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="VeiculoEstacionadoes" asp-action="Index">
+            <div class="form-group">
+
+                <label class="control-label">Busca Por Placa</label>
+                <input type="text" name="SearchString" class="form-control" />
+                <input type="submit" value="Buscar" class="btn btn-info" />
+            </div>
+        </form>
+    </div>
+</div>
+
 <table class="table">
-    <thead>        
+    <thead>
         <tr>
             <th>
                 Placa
@@ -51,7 +64,7 @@
                     @Html.DisplayFor(modelItem => item.HoraSaida)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Duracao)
+                    @Html.DisplayFor(modelItem => item.Duracao.Hours):@Html.DisplayFor(modelItem => item.Duracao.Minutes)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.HorasCobradas)
@@ -65,18 +78,14 @@
                 <td>
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.TicketId">Saída</a> |
-                    <a asp-action="Details" asp-route-id="@item.TicketId">Detalhes</a>
-                    
+                    <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.TicketId">Saída</a>                   
+
                 </td>
 
             </tr>
-            <form asp-action="Details">
-                <input type="hidden" asp-route-id="PlacaVeiculo" />
-                <input type="edit" value="Placa" class="btn btn-danger"@item. /> |
-
-            </form>
-
         }
+
+
+
     </tbody>
 </table>

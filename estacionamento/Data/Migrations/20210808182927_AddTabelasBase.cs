@@ -16,10 +16,10 @@ namespace estacionamento.Data.Migrations
                     HoraEntrada = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValue:DateTime.Now),
                     HoraSaida = table.Column<DateTime>(type: "datetime2", nullable: true, defaultValue:null),
                     Duracao = table.Column<TimeSpan>(type: "time", nullable: true, defaultValue: null),
-                    HorasCobradas = table.Column<int>(type: "int", nullable: true),
+                    HorasCobradas = table.Column<int>(type: "int", nullable: true, defaultValue: 1),
                     PlacaVeiculo = table.Column<string>(type: "nvarchar(7)", maxLength: 7, nullable: false),
                     ValorHora = table.Column<decimal>(type: "decimal(18,2)", nullable: true, defaultValue:1),
-                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: true, defaultValue:0.00),
+                    ValorTotal = table.Column<decimal>(type: "decimal(18,2)", nullable: true, defaultValue:1),
                     Status = table.Column<int>(type: "int", nullable: true, defaultValue: 0)
                 },
                 constraints: table =>
