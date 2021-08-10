@@ -78,8 +78,9 @@
                 <td>
                 </td>
                 <td>
+                    @if (item.Status == 0) { 
                     <a class="btn btn-outline-dark" asp-action="Edit" asp-route-id="@item.TicketId">Saída</a>                   
-
+                    }
                 </td>
 
             </tr>
