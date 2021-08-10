@@ -1,0 +1,47 @@
+﻿@model estacionamento.Models.SaidaVeiculoEstacionado
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Saída de Veículos</h1>
+
+<h4>Veiculo Estacionado</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TicketId" />
+            <div class="form-group">
+                <label asp-for="PlacaVeiculo" class="control-label"></label>
+                <input asp-for="PlacaVeiculo" class="form-control" readonly />
+                <span asp-validation-for="PlacaVeiculo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ValorTotal" class="control-label"></label>
+                <input asp-for="ValorTotal" class="form-control" />
+                <span asp-validation-for="ValorTotal" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="HorasCobradas" class="form-control" />
+            <input type="hidden" asp-for="HoraEntrada" class="form-control" />
+            <input type="hidden" asp-for="HoraSaida" class="form-control" />
+            <input type="hidden" asp-for="ValorHora" class="form-control" />
+            <input type="hidden" asp-for="ValorTotal" class="form-control" />
+            <input type="hidden" asp-for="Duracao" class="form-control" />
+            <input type="hidden" asp-for="Status" class="form-control" />
+
+            <div class="form-group">
+                <input type="submit" value="Confirmar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<estacionamento.Models.SaidaVeiculoEstacionado>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Marcar Endrada</a>
+    
+</p>
+<table class="table">
+    <thead>        
+        <tr>
+            <th>
+                Placa
+            </th>
+            <th>
+                Horário Entrada
+            </th>
+            <th>
+                Horário Saída
+            </th>
+            <th>
+                Duração
+            </th>
+            <th>
+                Hora(s) Cobrada(s)
+            </th>
+            <th>
+                Valor Por Hora
+            </th>
+            <th>
+                Total a Pagar
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PlacaVeiculo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraEntrada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HoraSaida)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duracao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HorasCobradas)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorHora)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorTotal)
+                </td>
+                <td>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.TicketId">Saída</a> |
+                    <a asp-action="Details" asp-route-id="@item.TicketId">Detalhes</a>
+                    
+                </td>
+
+            </tr>
+            <form asp-action="Details">
+                <input type="hidden" asp-route-id="PlacaVeiculo" />
+                <input type="edit" value="Placa" class="btn btn-danger"@item. /> |
+
+            </form>
+
+        }
+    </tbody>
+</table>
